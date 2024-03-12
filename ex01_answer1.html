@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <title>동물 소리</title>
+    <body>
+        <div id="sounds"></div>
+        <a href="javascript:on_animals('dog')">강아지</a>
+        <a href="javascript:on_animals('cat')">고양이</a>
+        <a href="javascript:on_animals('duck')">오리</a>
+    </body>
+    <script>
+        // const animal = "dog";
+        const soundsTag = document.getElementById("sounds");
+        function on_animals (animal){
+            if(animal == "dog"){
+                soundsTag.innerHTML = "멍멍!";
+                // 해당 요소의 HTML값 변경
+            }else if(animal == "cat"){
+                soundsTag.innerHTML = "야옹~";
+            }else if(animal == "duck"){
+                soundsTag.innerHTML = "꽥꽥!";
+            }else{
+                soundsTag.innerHTML = "몰라요";
+            }
+            
+        }
+
+    </script>
+</head>
+</html>
