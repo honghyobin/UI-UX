@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>주사위 게임</title>
+  <style>
+    .dice {
+      width: 100px;
+      height: 100px;
+      border: 1px solid black;
+      text-align: center;
+      font-size: 24px;
+      line-height: 100px;
+      display: inline-block;
+      margin: 5px;
+    }
+  </style>
+  <script>
+    function rollDice() {
+        let arr=[];
+      const diceElement = document.getElementById("dice_group");
+      for (let index = 0; index < 6; index++) {
+          let randomNumber = Math.floor(Math.random() * 6) + 1;
+          let randomDiv = `<div class="dice">${randomNumber}</div>`;
+          diceElement.innerHTML += randomDiv;
+          arr.push(randomNumber);
+        } 
+        console.log(arr)
+        const arrNumber=document.getElementById("arrNumber");
+        arrNumber.innerHTML=arr;
+    
+    }
+  </script>
+</head>
+
+<body>
+  <h1>주사위 게임</h1>
+  <div id="dice_group"></div>
+  <button onclick="rollDice()">주사위 던지기</button>
+  <p id="arrNumber"></p>
+</body>
+</html>
+ 
