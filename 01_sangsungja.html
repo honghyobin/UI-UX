@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>function으로 생성자</title>
+    <script>
+        function student(name,score,grade){
+            this.name=name;
+            this.score=score;
+            this.grade=grade;
+            this.comment=function(){
+                alert(`${this.name}학생의 점수는 ${this.score}이고 등급은 ${this.grade}입니다.`);
+            }
+        }
+        let stud1=new student("김하나",98,"A");
+        let stud2=new student("이하나",35,"F");
+        let stud3=new student("박하나",87,"B");
+        let stud4=new student("최하나",77,"C");
+
+        stud1.comment(); stud2.comment(); stud3.comment(); stud4.comment();
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
