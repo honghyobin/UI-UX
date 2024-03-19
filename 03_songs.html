@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>곡 제시 프로그램</title>
+</head>
+<body>
+    <div id="song_list"> </div>
+    <input type="button" onclick="search_event()" value="검색"/>
+    <script>
+        const songs=[
+            "모브닝 - 보통의 외로움",
+            "겸 - 단춘",
+            "리도어 - 영원은 그렇듯",
+            "하현상 - 등대",
+            "적재 - 반짝 빛나던 나의 2006년"
+        ];
+        const songListElement=document.getElementById("song_list");
+        songListElement.innerHTML="";
+        for(let i=0;i<songs.length;i++){
+            songListElement.innerHTML+=songs[i]+"<br>";
+        }
+        
+        songListElement.innerHTML+="<br> 추천곡 : "+suggestSong();
+
+        function search_event(){
+            let search_data=prompt("검색할 곡의 이름을 입력해주세요.");
+            let matchedSong=searchSong(search_data);
+            alert("검색결과 : "+matchedSong);
+        }
+
+        //곡검색
+        function searchSong(word){
+            word=word.toUpperCase();
+            for(let i=0;i<songs.length;i++){
+                let song=songs[i].toUpperCase();
+                if(song.indexOf(word)>=0){
+                    return song;
+                }
+            }
+            return "없는 곡입니다.";
+
+        }
+        //곡추천
+        function suggestSong(){
+            let index=Math.floor(Math.random()*songs.length);
+            return songs[index];
+        }
+    </script>
+    
+</body>
+</html>
