@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>플레이리스트</title>
+    <script>
+        window.onload=init;
+
+        function init(){
+            //곡 추가 버튼
+            let addbutton=document.getElementById("addButton");
+            addbutton.onclick=handleAddButtonClick;
+
+            let deleteButton=document.getElementById("deleteButton");
+            deleteButton.onclick=function(e){
+                removeAll();
+            };
+
+            //저장되어있는 곡이 있다면 불러오기
+            loadPlaylist();
+        }
+        function handleAddButtonClick(e){
+            let songName=document.getElementById("songTextInput").value;
+            if(songName==""){
+                alert("곡을 입력해주세요.");
+            }else{
+                //localStorage 저장
+                let playlistArray=getStoreArray("playlist");
+                playlistArray.push(songName);
+                localStorage.setItem("playlist",JSON.stringify(playlistArray))
+
+                //list에 추가
+                let ul=document.getElementById("playlist");
+                let li=document.createElement("li");
+                li.innerHTML=songName;
+                ul.appendChild(li);
+            }
+        }
+        //localStorage 값 배열로 가져오기
+        function getStoreArray(key){
+            let playlistArray=localStorage.getItem(key);
+            if(playlistArray==null||playlistArray==""){
+                playlistArray=new Array();
+            }else{
+                playlistArray=JSON.parse(playlistArray)
+            }
+            return playlistArray;
+        }
+        function removeAll(){
+            if(confirm("모두 지울까요?")){
+                localStorage.clear();
+                let ul=document.getElementById("playlist");
+                ul.innerHTML="";
+            }
+        }
+        function loadPlaylist(){
+            let playlistArray=getStoreArray("playlist");
+            addSongList(playlistArray);
+        }
+        function addSongList(songList){
+            
+        }
+    </script>
+</head>
+<body>
+    <form>
+        <input type="text" id="songTextInput" size="40" placeholder="노래 제목">
+        <input type="button" id="addButton" value="곡 추가">
+        <input type="button" id="deleteButton" value="곡 삭제">
+    </form>
+    <ul id="playlist">
+
+    </ul>
+</body>
+</html>
