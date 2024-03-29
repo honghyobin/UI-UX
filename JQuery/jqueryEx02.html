@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jquery-3.7.1.min.js"></script>
+
+    <script>
+        $(document).ready(()=>{
+        
+            $(".displaySlide div").slideUp();
+            $(".displaySlide p").on('click',function(e){
+                $(this).next().sliceToggle();
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="displaySlide">
+        <p>1. 오늘은 금요일</p>
+        <div>신난다</div>
+    </div>
+    <div class="displaySlide">
+        <p>2. 3월이 끝았다</p>
+        <div>빠르다</div>
+    </div>
+    <div class="displaySlide">
+        <p>3. 4월은 행사가 없다.</p>
+        <div>슬프다</div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jquery-3.7.1.min.js"></script>
+
+    <script>
+        // $(document).ready(()=>{
+        //     alert("1");
+        // });
+
+        $(document).ready(()=>{
+            // alert("2");
+            $("*").css("color","blue");
+            $("#divId").css("color","red");
+
+            $("input[type='text']").val("값넣기");
+            $("input:text").val("값넣기22");
+        });
+    </script>
+</head>
+<body>
+    <div id="divId">안녕하세요</div>
+    반갑습니다. <br>
+    <input type="text"/>
+</body>
+</html>
