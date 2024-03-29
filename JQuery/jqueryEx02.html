@@ -8,10 +8,9 @@
 
     <script>
         $(document).ready(()=>{
-        
             $(".displaySlide div").slideUp();
             $(".displaySlide p").on('click',function(e){
-                $(this).next().sliceToggle();
+                $(this).next().slideToggle();
             });
         });
     </script>
