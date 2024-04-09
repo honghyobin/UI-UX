@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jquery.scrollify.js</title>
+    <style>
+        body{
+            margin: 0px;
+        }
+        .page{
+            height: 400px;
+        }
+        .page-1{
+            background-color: rgb(235, 187, 203);
+        }
+        .page-2{
+            background-color: rgb(130, 218, 59);
+        }
+        .page-3{
+            background-color: beige;
+        }
+        .page-4{
+            background-color: rgb(240, 240, 105);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">헤더</div>
+    <div class="page page-1">내용1입니다~</div>
+    <div class="page page-2">내용2입니다~</div>
+    <div class="page page-3">내용3입니다~</div>
+    <div class="page page-4">내용4입니다~</div>
+    <div class="header">푸터</div>
+
+    <script src="./jquery-3.7.1.min.js"></script>
+    <script src="./jquery.scrollify.js"></script>
+    <script>
+        $.scrollify({
+            section:".page",
+            scrollbars:false,
+            scrollSpeed:500,
+            interstitialSection:".header, .footer",
+        })
+    </script>
+    
+</body>
+</html>
