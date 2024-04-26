@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button onclick="fetch_event()">fetch  동작</button>
+    <button onclick="fetch_event2()">fetch2  동작</button>
+
+    <br><br>
+    <button onclick="xmlHttp_event()">xmlHttp  동작</button>
+
+    <script>
+        function xmlHttp_event(){
+            let xhr=new XMLHttpRequest();
+            xhr.open("GET","http://localhost:3003/");
+
+            xhr.onreadystatechange=function(){ //요청 완료시 콜백 함수 등록.
+                if(xhr.readyState === XMLHttpRequest.DONE){
+                    if(xhr.status == 200){
+                        console.log(xhr.responseText);
+                    }else{
+                        //오류 발생 시의 처리
+                        console.log("ERROR", xhr.status);
+                    }
+                }
+            }
+            xhr.send(); //요청전송
+            
+        }
+        function fetch_event(){
+            alert("연결");
+            const url="http://localhost:3003/"
+            fetch(url)
+            .then(res=>res.json())
+            .then(date => {
+                console.log("11 : ", date)
+            });
+            
+
+        }
+        function fetch_event2(){
+            alert("Post 연결");
+            const url="http://localhost:3003/"
+            fetch(url,{method:"POST"})
+            .then(res=>res.json())
+            .then(date => {
+                console.log("post : ", date)
+            });
+            
+
+        }
+    </script>
+</body>
+</html>
