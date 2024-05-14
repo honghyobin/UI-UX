@@ -7,19 +7,36 @@
 </head>
 <body>
     <h3>학교급식정보</h3>
+    <input id="date_input" type="date">
+    <button onclick="getMenu()">제출</button>
     <div id="todayMenu"></div>
     <script>
-        let dateData=new Date().toISOString().slice(0,10);//2024-05-07
-        dateData=dateData.replace(/-/g,"");//20240507
-        //"현미밥 <br/>아욱된장국 ..."
-        fetch(`https://open.neis.go.kr/hub/mealServiceDietInfo?Type=json&KEY=31a252a31b2d4e1fbe6e2e344023d619&pIndex=1&pSize=100&ATPT_OFCDC_SC_CODE=B10&SD_SCHUL_CODE=7011569&MLSV_YMD=${dateData}`)
-        .then((response)=>response.json())
-        .then((data)=>{
-            console.log(data.mealServiceDietInfo[1]);
-            document.getElementById("todayMenu").innerHTML=
-            `<h3>[${data.mealServiceDietInfo[1].row[0].MMEAL_SC_NM}]</h3>`
-            +`${data.mealServiceDietInfo[1].row[0].DDISH_NM}`;
-        })
+
+        document.getElementById("date_input").value=new Date().toISOString().slice(0,10);//2024-05-07
+        const getMenu=()=>{
+
+            let dateData=document.getElementById("date_input").value;
+            
+            console.log("ww",dateData);
+            dateData=dateData.replace(/-/g,"");//20240507
+            //"현미밥 <br/>아욱된장국 ..."
+            fetch(`https://open.neis.go.kr/hub/mealServiceDietInfo?Type=json&KEY=31a252a31b2d4e1fbe6e2e344023d619&pIndex=1&pSize=100&ATPT_OFCDC_SC_CODE=B10&SD_SCHUL_CODE=7011569&MLSV_YMD=${dateData}`)
+            .then((response)=>response.json())
+            .then((data)=>{
+                console.log("data : ",data);
+                if(data.mealServiceDietInfo){
+                    const menInfo=data.mealServiceDietInfo[1].row;
+                    menInfo.forEach(function(menu){
+                        document.getElementById("todayMenu").innerHTML+=`<h3>${menu.MMEAL_SC_NM}</h3>${menu.DDISH_NM}`;
+                    }); 
+                }else{
+                    document.getElementById("todayMenu").innerHTML=`급식메뉴를 불러오지 못했습니다.`;
+                }
+                console.log(data.mealServiceDietInfo[1]);
+            })
+        }
+
+            
     </script>
 </body>
 </html>
