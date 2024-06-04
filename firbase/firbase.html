@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getFirestore, collection, getDocs, doc, setDoc, query, where } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+      
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+          apiKey: "AIzaSyChNGzRnHAZjz27pFlhmui6M0Rj9cXBRrA",
+          authDomain: "uiux-16fd8.firebaseapp.com",
+          projectId: "uiux-16fd8",
+          storageBucket: "uiux-16fd8.appspot.com",
+          messagingSenderId: "269905031854",
+          appId: "1:269905031854:web:9a01f7ebbf37c5ce01733f"
+        };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // Get a list of cities from your database
+        async function getCities(db) {
+            const citiesCol = collection(db, 'cities');
+            const citySnapshot = await getDocs(citiesCol);
+            const cityList = citySnapshot.docs.map(doc => doc.data());
+            return cityList;
+        }
+
+        getCities(db).then(st=>{
+            console.log(st);
+        })
+
+        const citiesRef = collection(db, "cities");
+
+        await setDoc(doc(citiesRef, "SF"), {
+            name: "San Francisco", state: "CA", country: "USA",
+            capital: false, population: 860000,
+            regions: ["west_coast", "norcal"] });
+        await setDoc(doc(citiesRef, "LA"), {
+            name: "Los Angeles", state: "CA", country: "USA",
+            capital: false, population: 3900000,
+            regions: ["west_coast", "socal"] });
+        await setDoc(doc(citiesRef, "DC"), {
+            name: "Washington, D.C.", state: null, country: "USA",
+            capital: true, population: 680000,
+            regions: ["east_coast"] });
+        await setDoc(doc(citiesRef, "TOK"), {
+            name: "Tokyo", state: null, country: "Japan",
+            capital: true, population: 9000000,
+            regions: ["kanto", "honshu"] });
+        await setDoc(doc(citiesRef, "BJ"), {
+            name: "Beijing", state: null, country: "China",
+            capital: true, population: 21500000,
+            regions: ["jingjinji", "hebei"] });
+
+            
+        // Create a query against the collection.
+        const q = query(citiesRef, where("state", "==", "CA"));
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        console.log("q :"+doc.id, " => ", doc.data());
+        });
+
+        const q2 = query(collection(db, "cities"), where("capital", "==", true));
+
+        const querySnapshot2 = await getDocs(q2);
+        querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        console.log("q2 :"+doc.id, " => ", doc.data());
+        });
+      </script>
+</body>
+</html>
